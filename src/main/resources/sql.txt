@@ -1,0 +1,4 @@
+SELECT * FROM pais WHERE ID = 2 ORDER BY NOME
+UPDATE pais SET nome = 'Capivara' WHERE id = 3;
+INSERT INTO pais(id, nome) VALUES(nextval('pais_seq'), 'Camelo');
+DELETE FROM pais WHERE nome = "Camelo" AND ID = 2
