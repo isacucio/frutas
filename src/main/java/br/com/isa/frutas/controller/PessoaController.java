@@ -51,7 +51,7 @@ public class PessoaController {
     @Operation(summary = "Listar pessoas.")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Pessoa listada com sucesso."),
-        @ApiResponse(responseCode = "400", description = "Pessoa não encontrada.")
+        @ApiResponse(responseCode = "400", description = "Pessoa encontrada.")
     })
     @GetMapping("/lista")
     public List<PessoaListaDTO> lista(
