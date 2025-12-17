@@ -34,16 +34,18 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
+                .headers(headers -> headers.frameOptions(frameOptionsConfig -> frameOptionsConfig.sameOrigin()))
                 .csrf(csrf -> csrf.disable())
                 .httpBasic(httpBasic -> httpBasic.disable())
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/rest-api-docs/**").permitAll()
-                        .requestMatchers("/h2console/**").permitAll()
+                        .requestMatchers("/h2-console/**").permitAll()
                         .requestMatchers("/openapi/**").permitAll()
                         .requestMatchers("/swagger-ui/**").permitAll()
                         .requestMatchers("/api/auth/**").permitAll()
-                        .requestMatchers("/api/user/**").hasRole("USER")
+                        .requestMatchers("/api/user/**").hasRole("ADMIN")
+                        .requestMatchers("/fruta/**").hasAnyRole("USER", "ADMIN")
                         .anyRequest().authenticated())
                 .userDetailsService(userDetailService)
                 .exceptionHandling(exceptionHandling -> exceptionHandling

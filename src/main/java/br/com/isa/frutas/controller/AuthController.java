@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,7 +15,6 @@ import br.com.isa.frutas.dto.UserRegisterDTO;
 import br.com.isa.frutas.entity.User;
 import br.com.isa.frutas.security.JWTUtil;
 import br.com.isa.frutas.service.UserService;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import jakarta.validation.Valid;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -47,6 +47,7 @@ public class AuthController {
         user.setPassword(userRegisterDTO.getPassword());
         user.setName(userRegisterDTO.getName());
         user.setEmail(userRegisterDTO.getEmail());
+        user.setRole("user");
         userService.create(user);
 
         String token = jwtUtil.generateToken(user.getUsername());

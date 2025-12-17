@@ -31,7 +31,7 @@ public class MyUserDetailService implements UserDetailsService {
                 username,
                 user.getPassword(),
                 Collections.singletonList(
-                        new SimpleGrantedAuthority("ROLE_USER")
+                        new SimpleGrantedAuthority("ROLE_" + user.getRole().toUpperCase())
                 )
         );
     }
